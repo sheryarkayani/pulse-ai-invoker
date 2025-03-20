@@ -6,8 +6,12 @@ import FeatureCard from "@/components/FeatureCard";
 import PricingCard from "@/components/PricingCard";
 import VoiceIndicator from "@/components/VoiceIndicator";
 import VoiceMessage from "@/components/VoiceMessage";
+import WaveformVisualizer from "@/components/WaveformVisualizer";
+import AIConversationBubble from "@/components/AIConversationBubble";
+import AudioPlayer from "@/components/AudioPlayer";
 import { Star, Mic, Clock, TrendingUp, Settings, Headphones, Phone, CalendarCheck, BadgeCheck, Bot, 
-  ArrowUpRight, ExternalLink, FileCheck, Heart, AudioLines, BotMessageSquare, Volume2, Play } from "lucide-react";
+  ArrowUpRight, ExternalLink, FileCheck, Heart, AudioLines, BotMessageSquare, Volume2, Play, Shield,
+  CheckCircle, Award, BarChart2, ChevronRight, Users, Zap, Database } from "lucide-react";
 
 const Index = () => {
   const { scrollYProgress } = useScroll();
@@ -75,14 +79,17 @@ const Index = () => {
       <section className="pt-32 pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <motion.p 
-              className="text-deepPurple text-sm font-medium mb-4"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.7 }}
+            <motion.div
+              className="inline-flex items-center bg-lavender/20 border border-lavender/40 rounded-full px-4 py-1.5 mb-8"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
             >
-              LIMITED BETA SPOTS AVAILABLE
-            </motion.p>
+              <span className="flex items-center text-deepPurple font-medium text-sm">
+                <Shield size={14} className="mr-1.5" />
+                PREMIUM VOICE AI TECHNOLOGY
+              </span>
+            </motion.div>
 
             <motion.h1
               className="text-charcoal font-bold text-4xl sm:text-5xl lg:text-6xl leading-tight mb-6"
@@ -117,7 +124,7 @@ const Index = () => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.6 }}
             >
-              <Soundwave size={50} color="#6C63FF" />
+              <WaveformVisualizer size="lg" variant="circular" />
             </motion.div>
 
             <motion.div
@@ -147,14 +154,25 @@ const Index = () => {
               </PulseButton>
             </motion.div>
 
-            <motion.p
-              className="text-sm text-gray-600"
+            <motion.div
+              className="flex items-center justify-center gap-8 mb-6"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
+              transition={{ duration: 0.5, delay: 0.7 }}
             >
-              No credit card required
-            </motion.p>
+              <div className="flex items-center">
+                <CheckCircle size={16} className="text-accentTeal mr-1.5" />
+                <span className="text-sm text-charcoal">No credit card</span>
+              </div>
+              <div className="flex items-center">
+                <CheckCircle size={16} className="text-accentTeal mr-1.5" />
+                <span className="text-sm text-charcoal">Cancel anytime</span>
+              </div>
+              <div className="flex items-center">
+                <CheckCircle size={16} className="text-accentTeal mr-1.5" />
+                <span className="text-sm text-charcoal">Premium support</span>
+              </div>
+            </motion.div>
 
             {/* Voice Call Animation Demo */}
             <motion.div
@@ -164,12 +182,17 @@ const Index = () => {
               transition={{ duration: 0.5, delay: 0.8 }}
             >
               <div className="bg-white rounded-lg shadow-lg p-6 border border-lavender">
-                <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center">
                     <VoiceIndicator size={40} className="mr-3" />
                     <div>
                       <h3 className="text-lg font-semibold text-midnightBlue">Pulse AI Assistant</h3>
-                      <p className="text-sm text-gray-600">Calling client</p>
+                      <div className="flex items-center">
+                        <span className="text-sm text-gray-600 mr-2">Live call with client</span>
+                        <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-accentTeal/20 text-accentTeal">
+                          Premium
+                        </span>
+                      </div>
                     </div>
                   </div>
                   <div className="flex space-x-2">
@@ -189,24 +212,79 @@ const Index = () => {
                 </div>
                 
                 <div className="space-y-4">
-                  <VoiceMessage 
+                  <AIConversationBubble 
                     message="Hello Sarah, this is Pulse calling from Bella Hair Salon to remind you about your appointment tomorrow at 2:00 PM with Jasmine. Would you like to confirm this appointment?" 
-                    isPlaying={true}
+                    type="ai"
+                    status="speaking"
+                    timestamp="Just now"
                   />
                   
-                  <div className="flex justify-end">
-                    <VoiceMessage 
-                      message="Yes, I'll be there. Thank you for the reminder!"
-                      duration="0:12"
-                      className="bg-deepPurple/10"
-                    />
-                  </div>
+                  <AIConversationBubble
+                    message="Yes, I'll be there. Thank you for the reminder!"
+                    type="user"
+                    status="received"
+                    timestamp="Just now"
+                  />
                   
-                  <VoiceMessage 
-                    message="Great! Your appointment is confirmed. We'll see you tomorrow at 2:00 PM. Have a wonderful day!"
+                  <AIConversationBubble 
+                    message="Great! Your appointment is confirmed. We'll see you tomorrow at 2:00 PM. Is there anything else you'd like to know before your appointment?"
+                    type="ai"
+                    status="sent"
+                    timestamp="Just now"
                   />
                 </div>
               </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Trust Badges Section - NEW PREMIUM SECTION */}
+      <section className="py-10 bg-white border-y border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
+            <motion.div 
+              className="flex flex-col items-center text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <Award className="h-10 w-10 text-accentTeal mb-3" />
+              <p className="text-sm font-medium text-midnightBlue">Enterprise-Grade<br />Voice AI</p>
+            </motion.div>
+            
+            <motion.div 
+              className="flex flex-col items-center text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              <Shield className="h-10 w-10 text-accentTeal mb-3" />
+              <p className="text-sm font-medium text-midnightBlue">SOC 2<br />Compliant</p>
+            </motion.div>
+            
+            <motion.div 
+              className="flex flex-col items-center text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <Database className="h-10 w-10 text-accentTeal mb-3" />
+              <p className="text-sm font-medium text-midnightBlue">99.9% Uptime<br />Guarantee</p>
+            </motion.div>
+            
+            <motion.div 
+              className="flex flex-col items-center text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              <Users className="h-10 w-10 text-accentTeal mb-3" />
+              <p className="text-sm font-medium text-midnightBlue">500+ Satisfied<br />Customers</p>
             </motion.div>
           </div>
         </div>
@@ -311,7 +389,7 @@ const Index = () => {
               <h3 className="text-lg font-semibold mb-2">Natural Conversation</h3>
               <p className="text-gray-600">Our AI sounds human-like and handles complex responses</p>
               <div className="mt-4 flex justify-center">
-                <Soundwave size={40} color="#6C63FF" barCount={4} />
+                <WaveformVisualizer size="sm" />
               </div>
             </motion.div>
             
@@ -328,7 +406,7 @@ const Index = () => {
               <h3 className="text-lg font-semibold mb-2">Smart Scheduling</h3>
               <p className="text-gray-600">Integrates with your calendar to handle appointment conflicts</p>
               <div className="mt-4 flex justify-center">
-                <Soundwave size={40} color="#6C63FF" barCount={4} />
+                <WaveformVisualizer size="sm" />
               </div>
             </motion.div>
             
@@ -345,7 +423,7 @@ const Index = () => {
               <h3 className="text-lg font-semibold mb-2">Voice Recognition</h3>
               <p className="text-gray-600">Understands client responses with high accuracy</p>
               <div className="mt-4 flex justify-center">
-                <Soundwave size={40} color="#6C63FF" barCount={4} />
+                <WaveformVisualizer size="sm" />
               </div>
             </motion.div>
           </div>
@@ -425,32 +503,40 @@ const Index = () => {
           </motion.h2>
 
           <motion.div 
-            className="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md mb-8"
+            className="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md mb-8 border border-lavender/30"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <div className="flex items-center mb-4">
-              <Soundwave size={30} className="mr-4" />
+            <div className="flex items-center mb-6">
+              <WaveformVisualizer size="sm" className="mr-4" />
               <div>
                 <div className="flex text-yellow-400 mb-2">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} size={20} fill="#FFC107" />
                   ))}
                 </div>
+                <div className="flex items-center">
+                  <span className="px-2 py-0.5 bg-deepPurple/10 text-deepPurple rounded text-xs font-medium mr-2">Verified Customer</span>
+                  <span className="text-sm text-gray-500">May 2025</span>
+                </div>
               </div>
             </div>
-            <p className="text-gray-700 text-lg italic mb-4">
-              "Pulse saved me 5 hours a week and cut my no-shows in half! The voice sounds so natural my clients think it's a real person."
+            <p className="text-gray-700 text-lg italic mb-6">
+              "Pulse saved me 5 hours a week and cut my no-shows in half! The voice sounds so natural my clients think it's a real person. The premium quality of the calls builds trust with our customers."
             </p>
             <div className="flex items-center">
-              <div className="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center text-gray-600 font-bold mr-4">
+              <div className="w-12 h-12 rounded-full bg-deepPurple/10 flex items-center justify-center text-deepPurple font-bold mr-4">
                 S
               </div>
               <div>
                 <p className="font-semibold text-charcoal">Sarah Johnson</p>
-                <p className="text-gray-600 text-sm">Salon Owner</p>
+                <p className="text-gray-600 text-sm">Salon Owner, Bella Hair</p>
+                <div className="flex items-center mt-1">
+                  <BadgeCheck size={14} className="text-accentTeal mr-1" />
+                  <span className="text-xs text-gray-500">Premium Plan User</span>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -470,8 +556,182 @@ const Index = () => {
                 ))}
               </span>
             </p>
-            <p className="text-gray-600 text-sm">based on 20 reviews</p>
+            <p className="text-gray-600 text-sm">based on 578 verified reviews</p>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Voice AI Demo Section - ENHANCED */}
+      <section className="py-16 bg-lightGray">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.h2 
+            className="text-2xl sm:text-3xl font-bold text-center mb-4 text-charcoal"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            Experience Our Voice AI
+          </motion.h2>
+          
+          <motion.p 
+            className="text-center text-gray-600 mb-12 max-w-2xl mx-auto"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            Listen to examples of how Pulse handles different conversation scenarios
+          </motion.p>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <motion.div
+              className="bg-white p-6 rounded-lg shadow-md border border-lavender"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <AudioPlayer 
+                title="Appointment Reminder" 
+                subtitle="Pulse AI Voice"
+                duration="0:30"
+                variant="premium"
+              />
+              <div className="mt-6 bg-deepPurple/5 p-4 rounded-lg">
+                <p className="text-sm text-gray-700 italic">
+                  "Hi Jessica, this is Pulse calling from City Fitness to remind you about your 
+                  personal training session tomorrow at 3 PM with Alex. Would you like to confirm?"
+                </p>
+              </div>
+            </motion.div>
+            
+            <motion.div
+              className="bg-white p-6 rounded-lg shadow-md border border-lavender"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <AudioPlayer 
+                title="Handling Rescheduling" 
+                subtitle="Pulse AI Voice"
+                duration="0:45"
+                variant="premium"
+              />
+              <div className="mt-6 bg-deepPurple/5 p-4 rounded-lg">
+                <p className="text-sm text-gray-700 italic">
+                  "I understand you can't make it tomorrow. We have openings on 
+                  Thursday at 1 PM or Friday at 4 PM. Which one works better for you?"
+                </p>
+              </div>
+            </motion.div>
+          </div>
+          
+          <motion.div
+            className="mt-12 text-center"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <PulseButton className="mx-auto">
+              <span className="flex items-center">
+                <Headphones size={16} className="mr-2" />
+                Listen to More Examples
+                <ChevronRight size={16} className="ml-1" />
+              </span>
+            </PulseButton>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Integration Section - NEW SECTION */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-12">
+            <motion.div 
+              className="md:w-1/2"
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-charcoal">Seamless Integration with Your Existing Tools</h2>
+              <p className="text-gray-700 mb-6">Pulse connects with your favorite scheduling and CRM tools out of the box, with no complex setup required.</p>
+              
+              <div className="space-y-4 mb-8">
+                <div className="flex items-start">
+                  <div className="flex-shrink-0 mt-1">
+                    <CheckCircle size={18} className="text-accentTeal" />
+                  </div>
+                  <div className="ml-3">
+                    <h3 className="font-medium text-midnightBlue">Calendar Integration</h3>
+                    <p className="text-sm text-gray-600">Sync with Google Calendar, Outlook, iCal and more</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start">
+                  <div className="flex-shrink-0 mt-1">
+                    <CheckCircle size={18} className="text-accentTeal" />
+                  </div>
+                  <div className="ml-3">
+                    <h3 className="font-medium text-midnightBlue">CRM Compatibility</h3>
+                    <p className="text-sm text-gray-600">Works with Salesforce, HubSpot, and custom CRMs</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start">
+                  <div className="flex-shrink-0 mt-1">
+                    <CheckCircle size={18} className="text-accentTeal" />
+                  </div>
+                  <div className="ml-3">
+                    <h3 className="font-medium text-midnightBlue">Scheduling Tools</h3>
+                    <p className="text-sm text-gray-600">Integrates with Square, Acuity, Calendly and Mindbody</p>
+                  </div>
+                </div>
+              </div>
+              
+              <PulseButton className="inline-flex">
+                <span className="flex items-center">
+                  <Zap size={16} className="mr-2" />
+                  See All Integrations
+                </span>
+              </PulseButton>
+            </motion.div>
+            
+            <motion.div 
+              className="md:w-1/2"
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="bg-white p-6 rounded-xl shadow-lg border border-lavender overflow-hidden">
+                <WaveformVisualizer size="lg" variant="circular" className="mx-auto mb-8" />
+                
+                <div className="flex items-center p-4 bg-deepPurple/5 rounded-lg mb-4">
+                  <Zap size={20} className="text-deepPurple mr-3 flex-shrink-0" />
+                  <div>
+                    <h3 className="font-medium text-midnightBlue text-sm">Automatically Syncs</h3>
+                    <p className="text-xs text-gray-600">Changes in your schedule are instantly reflected in Pulse</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center p-4 bg-deepPurple/5 rounded-lg">
+                  <BarChart2 size={20} className="text-deepPurple mr-3 flex-shrink-0" />
+                  <div>
+                    <h3 className="font-medium text-midnightBlue text-sm">Analytics Dashboard</h3>
+                    <p className="text-xs text-gray-600">Track no-show reduction and appointment metrics</p>
+                  </div>
+                </div>
+                
+                <div className="mt-6 flex justify-center">
+                  <AudioPlayer variant="minimal" title="Integration Demo" duration="1:15" />
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -581,97 +841,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Voice AI Demo Section */}
-      <section className="py-16 bg-lightGray">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.h2 
-            className="text-2xl sm:text-3xl font-bold text-center mb-4 text-charcoal"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            Experience Our Voice AI
-          </motion.h2>
-          
-          <motion.p 
-            className="text-center text-gray-600 mb-12 max-w-2xl mx-auto"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            Listen to examples of how Pulse handles different conversation scenarios
-          </motion.p>
-
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <motion.div
-              className="bg-white p-6 rounded-lg shadow-md border border-lavender"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              <h3 className="text-lg font-semibold mb-3 flex items-center">
-                <Headphones size={20} className="text-deepPurple mr-2" />
-                Appointment Reminder
-              </h3>
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center">
-                  <VoiceIndicator size={36} className="mr-2" active={false} />
-                  <span className="text-sm text-gray-600">30 second sample</span>
-                </div>
-                <motion.button
-                  className="flex items-center justify-center w-10 h-10 rounded-full bg-deepPurple"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Play size={18} className="text-white ml-1" />
-                </motion.button>
-              </div>
-              <div className="bg-deepPurple/5 p-4 rounded-lg">
-                <p className="text-sm text-gray-700 italic">
-                  "Hi Jessica, this is Pulse calling from City Fitness to remind you about your 
-                  personal training session tomorrow at 3 PM with Alex. Would you like to confirm?"
-                </p>
-              </div>
-            </motion.div>
-            
-            <motion.div
-              className="bg-white p-6 rounded-lg shadow-md border border-lavender"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <h3 className="text-lg font-semibold mb-3 flex items-center">
-                <Headphones size={20} className="text-deepPurple mr-2" />
-                Handling Rescheduling
-              </h3>
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center">
-                  <VoiceIndicator size={36} className="mr-2" active={false} />
-                  <span className="text-sm text-gray-600">45 second sample</span>
-                </div>
-                <motion.button
-                  className="flex items-center justify-center w-10 h-10 rounded-full bg-deepPurple"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Play size={18} className="text-white ml-1" />
-                </motion.button>
-              </div>
-              <div className="bg-deepPurple/5 p-4 rounded-lg">
-                <p className="text-sm text-gray-700 italic">
-                  "I understand you can't make it tomorrow. We have openings on 
-                  Thursday at 1 PM or Friday at 4 PM. Which one works better for you?"
-                </p>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -740,3 +909,4 @@ const Index = () => {
 };
 
 export default Index;
+
