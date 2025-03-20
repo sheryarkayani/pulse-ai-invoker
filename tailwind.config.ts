@@ -64,9 +64,13 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				// Pulse specific colors
-				charcoal: '#1A1A1A',
-				electricBlue: '#007BFF',
-				lightGray: '#E8ECEF',
+				deepPurple: '#6C63FF',
+				lavender: '#E0DFFF',
+				midnightBlue: '#2A265F',
+				softGray: '#F8F9FD',
+				darkText: '#343A40',
+				accentTeal: '#20E2D7',
+				accentPink: '#FF6B9B',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

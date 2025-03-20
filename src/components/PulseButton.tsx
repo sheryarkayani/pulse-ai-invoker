@@ -17,10 +17,10 @@ const PulseButton: React.FC<PulseButtonProps> = ({
   secondary = false,
   animated = false
 }) => {
-  const baseClasses = "inline-flex items-center justify-center rounded-md px-6 py-3 font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-electricBlue focus:ring-offset-2";
+  const baseClasses = "inline-flex items-center justify-center rounded-md px-6 py-3 font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-deepPurple focus:ring-offset-2";
   
-  const primaryClasses = "bg-electricBlue text-white hover:bg-electricBlue/90 hover:scale-105 shadow-sm";
-  const secondaryClasses = "text-electricBlue hover:underline";
+  const primaryClasses = "bg-deepPurple text-white hover:bg-deepPurple/90 hover:scale-105 shadow-sm";
+  const secondaryClasses = "text-deepPurple hover:underline";
   
   const combinedClasses = `${baseClasses} ${secondary ? secondaryClasses : primaryClasses} ${className}`;
 

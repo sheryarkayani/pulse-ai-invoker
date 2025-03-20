@@ -10,7 +10,7 @@ interface SoundwaveProps {
 
 const Soundwave: React.FC<SoundwaveProps> = ({ 
   className = "", 
-  color = "#007BFF", 
+  color = "#6C63FF", 
   size = 60 
 }) => {
   const barVariants = {

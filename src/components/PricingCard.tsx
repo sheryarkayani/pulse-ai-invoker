@@ -22,7 +22,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
 }) => {
   return (
     <motion.div
-      className={`bg-white p-6 rounded-lg shadow hover-card-lift ${isPopular ? 'border-2 border-electricBlue' : 'border border-gray-200'}`}
+      className={`bg-white p-6 rounded-lg shadow hover-card-lift ${isPopular ? 'border-2 border-deepPurple' : 'border border-lavender'}`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ 
         opacity: 1, 
@@ -35,15 +35,15 @@ const PricingCard: React.FC<PricingCardProps> = ({
     >
       {isPopular && (
         <div className="absolute top-0 right-0 -mt-3 -mr-3">
-          <span className="bg-electricBlue text-white text-xs font-bold px-3 py-1 rounded-full">POPULAR</span>
+          <span className="bg-deepPurple text-white text-xs font-bold px-3 py-1 rounded-full">POPULAR</span>
         </div>
       )}
 
-      <h3 className="text-xl font-bold mb-2 text-charcoal">{title}</h3>
+      <h3 className="text-xl font-bold mb-2 text-midnightBlue">{title}</h3>
       
       <div className="mb-4">
-        <span className="text-3xl font-bold text-electricBlue">{price}</span>
-        <span className="text-gray-600">/month</span>
+        <span className="text-3xl font-bold text-deepPurple">{price}</span>
+        <span className="text-darkText">/month</span>
         <p className="text-sm text-gray-500">or {yearlyPrice}/year</p>
       </div>
       
@@ -51,10 +51,10 @@ const PricingCard: React.FC<PricingCardProps> = ({
         <ul className="space-y-2">
           {features.map((feature, i) => (
             <li key={i} className="flex items-start">
-              <svg className="w-5 h-5 text-electricBlue flex-shrink-0 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <svg className="w-5 h-5 text-accentTeal flex-shrink-0 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
               </svg>
-              <span className="text-gray-700">{feature}</span>
+              <span className="text-darkText">{feature}</span>
             </li>
           ))}
         </ul>
