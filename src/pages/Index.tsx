@@ -1,16 +1,18 @@
-
-import React from "react";
+import React, { useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Soundwave from "@/components/Soundwave";
 import PulseButton from "@/components/PulseButton";
 import FeatureCard from "@/components/FeatureCard";
 import PricingCard from "@/components/PricingCard";
+import VoiceIndicator from "@/components/VoiceIndicator";
+import VoiceMessage from "@/components/VoiceMessage";
 import { Star, Mic, Clock, TrendingUp, Settings, Headphones, Phone, CalendarCheck, BadgeCheck, Bot, 
-  ArrowUpRight, ExternalLink, FileCheck, Heart } from "lucide-react";
+  ArrowUpRight, ExternalLink, FileCheck, Heart, AudioLines, BotMessageSquare, Volume2, Play } from "lucide-react";
 
 const Index = () => {
   const { scrollYProgress } = useScroll();
   const opacity = useTransform(scrollYProgress, [0, 0.05], [1, 0]);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
 
   return (
     <div className="min-h-screen bg-white">
@@ -25,7 +27,7 @@ const Index = () => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
               >
-                <Soundwave size={20} color="#007BFF" />
+                <Soundwave size={20} color="#6C63FF" />
                 <span className="text-xl font-bold text-charcoal">Pulse</span>
               </motion.div>
             </div>
@@ -33,26 +35,36 @@ const Index = () => {
               <nav className="flex items-center space-x-6">
                 <motion.a 
                   href="#features" 
-                  className="text-charcoal hover:text-electricBlue transition-colors"
+                  className="text-charcoal hover:text-deepPurple transition-colors"
                   whileHover={{ scale: 1.05 }}
                 >
                   Features
                 </motion.a>
                 <motion.a 
                   href="#testimonials" 
-                  className="text-charcoal hover:text-electricBlue transition-colors"
+                  className="text-charcoal hover:text-deepPurple transition-colors"
                   whileHover={{ scale: 1.05 }}
                 >
                   Testimonials
                 </motion.a>
                 <motion.a 
                   href="#pricing" 
-                  className="text-charcoal hover:text-electricBlue transition-colors"
+                  className="text-charcoal hover:text-deepPurple transition-colors"
                   whileHover={{ scale: 1.05 }}
                 >
                   Pricing
                 </motion.a>
-                <PulseButton>Try Free for 14 Days</PulseButton>
+                <motion.div 
+                  className="relative"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <PulseButton>
+                    <span className="flex items-center">
+                      <AudioLines size={16} className="mr-2" />
+                      Try Free for 14 Days
+                    </span>
+                  </PulseButton>
+                </motion.div>
               </nav>
             </div>
           </div>
@@ -64,7 +76,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <motion.p 
-              className="text-electricBlue text-sm font-medium mb-4"
+              className="text-deepPurple text-sm font-medium mb-4"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.7 }}
@@ -105,11 +117,11 @@ const Index = () => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.6 }}
             >
-              <Soundwave size={50} color="#007BFF" />
+              <Soundwave size={50} color="#6C63FF" />
             </motion.div>
 
             <motion.div
-              className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4"
+              className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8"
               initial={{ opacity: 0, y: 10 }}
               animate={{ 
                 opacity: 1, 
@@ -122,10 +134,16 @@ const Index = () => {
               }}
             >
               <PulseButton className="min-w-[200px]">
-                Try Pulse Free for 14 Days
+                <span className="flex items-center">
+                  <AudioLines size={16} className="mr-2" />
+                  Try Pulse Free for 14 Days
+                </span>
               </PulseButton>
               <PulseButton secondary>
-                See a Demo
+                <span className="flex items-center">
+                  <Headphones size={16} className="mr-2" />
+                  See a Demo
+                </span>
               </PulseButton>
             </motion.div>
 
@@ -137,6 +155,59 @@ const Index = () => {
             >
               No credit card required
             </motion.p>
+
+            {/* Voice Call Animation Demo */}
+            <motion.div
+              className="mt-16 max-w-2xl mx-auto"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.8 }}
+            >
+              <div className="bg-white rounded-lg shadow-lg p-6 border border-lavender">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center">
+                    <VoiceIndicator size={40} className="mr-3" />
+                    <div>
+                      <h3 className="text-lg font-semibold text-midnightBlue">Pulse AI Assistant</h3>
+                      <p className="text-sm text-gray-600">Calling client</p>
+                    </div>
+                  </div>
+                  <div className="flex space-x-2">
+                    <motion.div 
+                      className="w-8 h-8 rounded-full bg-deepPurple/10 flex items-center justify-center"
+                      whileHover={{ scale: 1.1, backgroundColor: "rgba(108, 99, 255, 0.2)" }}
+                    >
+                      <Volume2 size={16} className="text-deepPurple" />
+                    </motion.div>
+                    <motion.div 
+                      className="w-8 h-8 rounded-full bg-deepPurple/10 flex items-center justify-center"
+                      whileHover={{ scale: 1.1, backgroundColor: "rgba(108, 99, 255, 0.2)" }}
+                    >
+                      <Mic size={16} className="text-deepPurple" />
+                    </motion.div>
+                  </div>
+                </div>
+                
+                <div className="space-y-4">
+                  <VoiceMessage 
+                    message="Hello Sarah, this is Pulse calling from Bella Hair Salon to remind you about your appointment tomorrow at 2:00 PM with Jasmine. Would you like to confirm this appointment?" 
+                    isPlaying={true}
+                  />
+                  
+                  <div className="flex justify-end">
+                    <VoiceMessage 
+                      message="Yes, I'll be there. Thank you for the reminder!"
+                      duration="0:12"
+                      className="bg-deepPurple/10"
+                    />
+                  </div>
+                  
+                  <VoiceMessage 
+                    message="Great! Your appointment is confirmed. We'll see you tomorrow at 2:00 PM. Have a wonderful day!"
+                  />
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -160,8 +231,12 @@ const Index = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
+              className="relative"
             >
-              <p className="text-electricBlue text-3xl sm:text-4xl font-bold mb-2">25%</p>
+              <div className="absolute top-0 right-0 opacity-10">
+                <Soundwave size={40} color="#6C63FF" barCount={4} />
+              </div>
+              <p className="text-deepPurple text-3xl sm:text-4xl font-bold mb-2">25%</p>
               <p className="text-xl font-semibold mb-1">No-Show Reduction</p>
               <p className="text-gray-600">in beta testing</p>
             </motion.div>
@@ -171,8 +246,12 @@ const Index = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
+              className="relative"
             >
-              <p className="text-electricBlue text-3xl sm:text-4xl font-bold mb-2">20+</p>
+              <div className="absolute top-0 right-0 opacity-10">
+                <Soundwave size={40} color="#6C63FF" barCount={4} />
+              </div>
+              <p className="text-deepPurple text-3xl sm:text-4xl font-bold mb-2">20+</p>
               <p className="text-xl font-semibold mb-1">Beta Users</p>
               <p className="text-gray-600">salons, gyms, tutors</p>
             </motion.div>
@@ -182,8 +261,12 @@ const Index = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.4 }}
+              className="relative"
             >
-              <p className="text-electricBlue text-3xl sm:text-4xl font-bold mb-2">90%</p>
+              <div className="absolute top-0 right-0 opacity-10">
+                <Soundwave size={40} color="#6C63FF" barCount={4} />
+              </div>
+              <p className="text-deepPurple text-3xl sm:text-4xl font-bold mb-2">90%</p>
               <p className="text-xl font-semibold mb-1">Satisfaction</p>
               <p className="text-gray-600">from early users</p>
             </motion.div>
@@ -191,8 +274,86 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Voice AI Showcase */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.h2 
+            className="text-2xl sm:text-3xl font-bold text-center mb-4 text-charcoal"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            How Pulse Works
+          </motion.h2>
+          
+          <motion.p 
+            className="text-center text-gray-600 mb-12 max-w-2xl mx-auto"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            Our voice AI technology sounds natural and handles complex conversations
+          </motion.p>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <motion.div
+              className="text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-deepPurple/10 mb-4">
+                <BotMessageSquare size={32} className="text-deepPurple" />
+              </div>
+              <h3 className="text-lg font-semibold mb-2">Natural Conversation</h3>
+              <p className="text-gray-600">Our AI sounds human-like and handles complex responses</p>
+              <div className="mt-4 flex justify-center">
+                <Soundwave size={40} color="#6C63FF" barCount={4} />
+              </div>
+            </motion.div>
+            
+            <motion.div
+              className="text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-deepPurple/10 mb-4">
+                <CalendarCheck size={32} className="text-deepPurple" />
+              </div>
+              <h3 className="text-lg font-semibold mb-2">Smart Scheduling</h3>
+              <p className="text-gray-600">Integrates with your calendar to handle appointment conflicts</p>
+              <div className="mt-4 flex justify-center">
+                <Soundwave size={40} color="#6C63FF" barCount={4} />
+              </div>
+            </motion.div>
+            
+            <motion.div
+              className="text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-deepPurple/10 mb-4">
+                <AudioLines size={32} className="text-deepPurple" />
+              </div>
+              <h3 className="text-lg font-semibold mb-2">Voice Recognition</h3>
+              <p className="text-gray-600">Understands client responses with high accuracy</p>
+              <div className="mt-4 flex justify-center">
+                <Soundwave size={40} color="#6C63FF" barCount={4} />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Features Section */}
-      <section id="features" className="py-20">
+      <section id="features" className="py-20 bg-lightGray">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2 
             className="text-2xl sm:text-3xl font-bold text-center mb-4 text-charcoal"
@@ -220,6 +381,7 @@ const Index = () => {
               description="Automated reminders and confirmations cut no-shows by 30%."
               icon={Phone}
               index={0}
+              showSoundwave={true}
             />
             
             <FeatureCard 
@@ -227,6 +389,7 @@ const Index = () => {
               description="Save 5+ hours a week by automating client calls."
               icon={Clock}
               index={1}
+              showSoundwave={true}
             />
             
             <FeatureCard 
@@ -234,6 +397,7 @@ const Index = () => {
               description="Follow-ups and outreach campaigns drive repeat bookings."
               icon={TrendingUp}
               index={2}
+              showSoundwave={true}
             />
             
             <FeatureCard 
@@ -241,6 +405,7 @@ const Index = () => {
               description="Works with booking systems like Square and Calendly."
               icon={Settings}
               index={3}
+              showSoundwave={true}
             />
           </div>
         </div>
@@ -416,8 +581,99 @@ const Index = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Voice AI Demo Section */}
       <section className="py-16 bg-lightGray">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.h2 
+            className="text-2xl sm:text-3xl font-bold text-center mb-4 text-charcoal"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            Experience Our Voice AI
+          </motion.h2>
+          
+          <motion.p 
+            className="text-center text-gray-600 mb-12 max-w-2xl mx-auto"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            Listen to examples of how Pulse handles different conversation scenarios
+          </motion.p>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <motion.div
+              className="bg-white p-6 rounded-lg shadow-md border border-lavender"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <h3 className="text-lg font-semibold mb-3 flex items-center">
+                <Headphones size={20} className="text-deepPurple mr-2" />
+                Appointment Reminder
+              </h3>
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center">
+                  <VoiceIndicator size={36} className="mr-2" active={false} />
+                  <span className="text-sm text-gray-600">30 second sample</span>
+                </div>
+                <motion.button
+                  className="flex items-center justify-center w-10 h-10 rounded-full bg-deepPurple"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Play size={18} className="text-white ml-1" />
+                </motion.button>
+              </div>
+              <div className="bg-deepPurple/5 p-4 rounded-lg">
+                <p className="text-sm text-gray-700 italic">
+                  "Hi Jessica, this is Pulse calling from City Fitness to remind you about your 
+                  personal training session tomorrow at 3 PM with Alex. Would you like to confirm?"
+                </p>
+              </div>
+            </motion.div>
+            
+            <motion.div
+              className="bg-white p-6 rounded-lg shadow-md border border-lavender"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <h3 className="text-lg font-semibold mb-3 flex items-center">
+                <Headphones size={20} className="text-deepPurple mr-2" />
+                Handling Rescheduling
+              </h3>
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center">
+                  <VoiceIndicator size={36} className="mr-2" active={false} />
+                  <span className="text-sm text-gray-600">45 second sample</span>
+                </div>
+                <motion.button
+                  className="flex items-center justify-center w-10 h-10 rounded-full bg-deepPurple"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Play size={18} className="text-white ml-1" />
+                </motion.button>
+              </div>
+              <div className="bg-deepPurple/5 p-4 rounded-lg">
+                <p className="text-sm text-gray-700 italic">
+                  "I understand you can't make it tomorrow. We have openings on 
+                  Thursday at 1 PM or Friday at 4 PM. Which one works better for you?"
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <motion.h2 
@@ -448,7 +704,10 @@ const Index = () => {
               className="inline-block"
             >
               <PulseButton className="min-w-[200px]">
-                Try Pulse Free for 14 Days
+                <span className="flex items-center">
+                  <AudioLines size={16} className="mr-2" />
+                  Try Pulse Free for 14 Days
+                </span>
               </PulseButton>
             </motion.div>
           </div>
